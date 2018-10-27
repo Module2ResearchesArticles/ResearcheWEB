@@ -7,6 +7,14 @@ const bcryptSalt = 8;
 
 //Registro de usuario
 
+function isActive(req, res, next){
+  User.findById(req.user._id)
+      .then((user) => {
+        if(user.active === true) return next();
+        res.redirect('/auth/login',{msg: 'Por favor verifica tu correo'})
+      })
+}
+
 router.get('/register',(req,res) => {
   res.render('auth/register')
 });
@@ -43,7 +51,7 @@ router.get('/confirm/:confirmCode', (req, res) => {
   .then(user => {
       User.update({_id: user.id},{$set : {active: true}})
         .then(() =>{
-          res.redirect('/login');
+          res.redirect('/auth/login');
         })
     })
     .catch (err => {
