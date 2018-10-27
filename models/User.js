@@ -3,11 +3,15 @@ const passportLocalMongoose = require('passport-local-mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  name: {
+  username: {
     type: String,
     require: true
   },
-  email: String
+  email: String,
+  active: {
+    type: Boolean,
+    default: false
+  }
 },{
   timestamps: {
     createdAt: "created_at",
