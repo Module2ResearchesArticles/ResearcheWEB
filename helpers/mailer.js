@@ -16,7 +16,7 @@ transport.verify(function(error, success) {
 });
 
 exports.send = (options) => {
-    const mailOptions = {
+    const mailOptions = {  
         subject: options.subject,
         from: `Please confirm your account <noreply@myfiles.com>`,
         to: options.email,

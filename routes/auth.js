@@ -59,5 +59,13 @@ router.get('/confirm/:confirmCode', (req, res) => {
     });
 });
 
+router.get('/login',(req,res) => {
+  res.render('auth/login')
+});
+
+router.post('/auth/login',(req,res,next) => {
+  
+});
+
 module.exports = router;
 
