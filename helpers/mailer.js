@@ -1,4 +1,4 @@
-const mailer = require('mailer');
+const mailer = require('nodemailer');
 const transport = mailer.createTransport({
     service: "SendGrid",
     auth:{
@@ -8,7 +8,7 @@ const transport = mailer.createTransport({
 });
 
 exports.send = (options) => {
-    const mailOptions = {
+    const mailOptions = {  
         subject: options.subject,
         from: `Please comfirm your account <noreply@myfiles.com>`,
         to: options.email,

@@ -31,3 +31,11 @@ router.post('/register',(req,res) => {
             res.status(500).render('register',{err, msg: "No pudimos registrate"})
         })
 })
+
+router.get('/login',(req,res) => {
+    res.render('auth/login')
+});
+
+router.post('/auth/login',(req,res,next) => {
+    
+});
