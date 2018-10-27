@@ -11,7 +11,8 @@ const userSchema = new Schema({
   active: {
     type: Boolean,
     default: false
-  }
+  },
+  confirmationCode: String
 },{
   timestamps: {
     createdAt: "created_at",
