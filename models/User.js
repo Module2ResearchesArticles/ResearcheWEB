@@ -10,8 +10,8 @@ const userSchema = new Schema({
   email: String
 },{
   timestamps: {
-    createdAt = "created_at",
-    updatedAt = "updated_at"
+    createdAt: "created_at",
+    updatedAt: "updated_at"
   }
 })
 userSchema.plugin(passportLocalMongoose,{ usernameField: "email"});
