@@ -5,8 +5,7 @@ const mail = require('../helpers/mailer')
 const bcrypt = require('bcrypt')
 const bcryptSalt = 8;
 
-//Registro de usuario
-
+//Middleware
 function isActive(req, res, next){
   User.findById(req.user._id)
       .then((user) => {
@@ -14,6 +13,9 @@ function isActive(req, res, next){
         res.redirect('/auth/login',{msg: 'Por favor verifica tu correo'})
       })
 }
+
+//Registro de usuario
+
 
 router.get('/register',(req,res) => {
   res.render('auth/register')
