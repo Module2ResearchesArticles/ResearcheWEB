@@ -1,0 +1,20 @@
+<h2>Perfil de {{user.username}}</h2>
+<div>
+  <h3>Tus repositorios</h3>
+  <ul>
+    {{#each repostiories}}
+      <li><a href="#">{{this.name}}</a></li>
+      <button>Borrar</button>
+    {{/each}}
+  </ul>
+</div>
+<div>
+  <h3>Crea un repositorio</h3>
+  <form action="/create-repository">
+    <label for="">Nombre: </label>
+    <input type="text" name="name">
+    <label for="">Descripción: </label>
+    <textarea name="description" id="" cols="30" rows="10"></textarea>
+    <button type="submit">Crear repositorio</button>
+  </form>
+</div>
