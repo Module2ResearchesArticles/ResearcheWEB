@@ -20,10 +20,14 @@ router.get('/', (req, res, next) => {
 router.get ('/main/:id', isLoggedIn, (req,res,next) => {
   User.findById(req.params.id)
       .then(user => {
-        Repository.find({author: user._id})
+        Repository.find({author:user._id})
           .then(repositories => {
+            // console.log(repositories)
             res.render('private/user-main',{user, repositories})
           })        
+          .catch(err => {
+            console.log(err);
+          })
       })
 })
 
