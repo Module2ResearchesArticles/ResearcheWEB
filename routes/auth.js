@@ -1,13 +1,12 @@
-const express       = require('express');
-const passport      = require('passport');
-const User          = require('../models/User');
-const mail          = require('../helpers/mailer');
-const bcrypt        = require('bcrypt');
-const bcryptSalt    = 8;
-const router        = express.Router();
+const express = require('express');
+const router  = express.Router();
+const User = require('../models/User')
+const mail = require('../helpers/mailer')
+const bcrypt = require('bcrypt')
+const bcryptSalt = 8;
+const passport = require('passport');
 
-//Registro de usuario
-
+//Middleware
 function isActive(req, res, next){
   User.findById(req.user._id)
       .then((user) => {
@@ -15,6 +14,9 @@ function isActive(req, res, next){
         res.redirect('/auth/login',{msg: 'Por favor verifica tu correo'})
       })
 }
+
+//Registro de usuario
+
 
 router.get('/register',(req,res) => {
   res.render('auth/register')
@@ -46,6 +48,8 @@ router.post('/register',(req,res) => {
         })
 })
 
+//Confirmación de usuario
+
 router.get('/confirm/:confirmCode', (req, res) => {
   let confirmCode = req.params.confirmCode;
   User.findOne({"confirmationCode": confirmCode})  
@@ -60,12 +64,15 @@ router.get('/confirm/:confirmCode', (req, res) => {
     });
 });
 
+//Login
+
 router.get('/login',(req,res) => {
   res.render('auth/login')
 });
 
-router.post('/login',passport.authenticate('local'), (req,res) => {
-            res.redirect('/');
+router.post('/login', passport.authenticate('local'), (req, res) =>  {
+  console.log('ya te')
+  res.redirect(`/main/${req.user._id}`)
 });
 
 module.exports = router;
