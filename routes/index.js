@@ -17,7 +17,7 @@ router.get('/', (req, res, next) => {
   res.render('index',{user:req.user});
 });
 
-router.get ('/main/:id', (req,res,next) => {
+router.get ('/main/:id', isLoggedIn, (req,res,next) => {
   User.findById(req.params.id)
       .then(user => {
         Repository.find({author: user._id})
