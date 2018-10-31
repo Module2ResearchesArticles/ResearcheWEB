@@ -1,9 +1,10 @@
-const express = require('express');
-const router  = express.Router();
-const User = require('../models/User')
-const mail = require('../helpers/mailer')
-const bcrypt = require('bcrypt')
-const bcryptSalt = 8;
+const express       = require('express');
+const passport      = require('passport');
+const User          = require('../models/User');
+const mail          = require('../helpers/mailer');
+const bcrypt        = require('bcrypt');
+const bcryptSalt    = 8;
+const router        = express.Router();
 
 //Registro de usuario
 
@@ -37,7 +38,7 @@ router.post('/register',(req,res) => {
                 hashName: hashName
             };
             mail.send(options);
-            res.redirect('/')
+            res.redirect('/auth/login')
         })
         .catch((err) => {
             console.log(err);
@@ -63,8 +64,8 @@ router.get('/login',(req,res) => {
   res.render('auth/login')
 });
 
-router.post('/auth/login',(req,res,next) => {
-  
+router.post('/login',passport.authenticate('local'), (req,res) => {
+            res.redirect('/');
 });
 
 module.exports = router;

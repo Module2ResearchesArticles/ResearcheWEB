@@ -19,7 +19,7 @@ const userSchema = new Schema({
     updatedAt: "updated_at"
   }
 })
-userSchema.plugin(passportLocalMongoose,{ usernameField: "email"});
+userSchema.plugin(passportLocalMongoose,{usernameField:"email"});
 
 const User = mongoose.model("User",userSchema);
 module.exports = User;
