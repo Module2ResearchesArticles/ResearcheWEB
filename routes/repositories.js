@@ -30,7 +30,11 @@ router.post('/create-repository',(req, res) => {
 router.get('/repositories/:id',isAuthorized,(req, res) => {
   Repository.findById(req.params.id)
       .then(repository => {
-          res.render('private/repository-view',{repository})
+          Document.find({repository:repository._id})
+            .then(documents => {
+              res.render('private/repository-view',{repository, documents})
+            })
+         
       })
       .catch(err => {
           console.log(err)

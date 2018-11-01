@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const User = require('../models/User')
 const Repository = require('../models/Repository')
-
+const Documents = require('../models/Document')
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next()
@@ -18,6 +18,7 @@ function isLoggedIn(req, res, next){
 router.get('/', (req, res, next) => {
   res.render('index',{user:req.user});
 });
+/* GET home page */
 
 router.get ('/main/:id', isLoggedIn, (req,res,next) => {
   User.findById(req.params.id)
@@ -34,6 +35,15 @@ router.get ('/main/:id', isLoggedIn, (req,res,next) => {
 })
 
 
+
+router.get('/editor', (req, res, next) => {
+    var info = '<h1>aqui estara todo el pedo de la base</h1>';
+    res.render('private/editor',{info});
+  });
+
+router.post('/editor', (req, res, next) => {
+    console.log(req.body);
+  });
 
 module.exports = router;
 

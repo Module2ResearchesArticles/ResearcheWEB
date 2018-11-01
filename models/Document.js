@@ -1,12 +1,17 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const idObject = Schema.Types.ObjectId;
 const documentSchema = new Schema({
   name: String,
   description: String,
-  author: String,
-  repository: String,
-  parentDocument: String,
-  childDocuments: [String],
+  repository: {
+    type:   idObject,
+    ref:    "Repository"
+  },
+  parentDocument: {
+    type:   idObject,
+    ref:    "Document"
+  },
   authorizations: [String],
   locationUrl: String,
   content: String,
