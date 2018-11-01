@@ -10,7 +10,7 @@ router.post('/create-repository',(req, res) => {
   const author = req.user._id; 
   Repository.create({name,description,author})
             .then(repository => {
-              res.redirect('/')
+              res.redirect(`/main/${req.user._id}`)
             })
 })
 

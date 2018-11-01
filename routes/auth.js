@@ -40,7 +40,7 @@ router.post('/register',(req,res) => {
                 hashName: hashName
             };
             mail.send(options);
-            res.redirect('/')
+            res.redirect('/auth/login')
         })
         .catch((err) => {
             console.log(err);
@@ -73,6 +73,11 @@ router.get('/login',(req,res) => {
 router.post('/login', passport.authenticate('local'), (req, res) =>  {
   console.log('ya te')
   res.redirect(`/main/${req.user._id}`)
+});
+
+router.get('/logout', (req,res) => {
+  req.logout();
+  res.redirect('/auth/login');
 });
 
 module.exports = router;

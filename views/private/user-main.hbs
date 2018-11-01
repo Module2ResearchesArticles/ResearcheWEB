@@ -1,9 +1,10 @@
+<a href="/auth/logout">Logout</a>
 <h2>Perfil de {{user.username}}</h2>
 <div>
   <h3>Tus repositorios</h3>
   <ul>
     {{#each repositories}}
-      <li><a href="/delete/{{this._id}}">{{this.name}}</a></li>
+      <li><a href="/repositories/{{this._id}}">{{this.name}}</a></li>
         <form action="/delete/{{this.id}}" method="post"><button>Borrar</button></form>
     {{/each}}
   </ul>
