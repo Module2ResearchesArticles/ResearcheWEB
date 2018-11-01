@@ -2,4 +2,6 @@
 <p>Welcome to {{title}}</p>
 <a href="/auth/register">Registro</a>
 <a href="/auth/login">Accede a tu cuenta</a>
-<a href="/main/{{user._id}}">Tu perfil</a> 
+{{#if user}}
+    <a href="/main/{{user._id}}">Tu perfil</a>
+{{/if}}
