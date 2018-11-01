@@ -54,5 +54,12 @@ router.get('/repositories/:id',isAuthorized,(req, res) => {
         })
 })
 
+router.post('/delete/:id', (req, res) => {
+    Repository.findByIdAndRemove(req.params.id)
+        then(() =>{
+            res.redirect('/')
+        })
+})
+
 module.exports = router;
 

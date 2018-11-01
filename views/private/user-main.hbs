@@ -3,8 +3,8 @@
   <h3>Tus repositorios</h3>
   <ul>
     {{#each repositories}}
-      <li><a href="/repositories/{{this._id}}">{{this.name}}</a></li>
-      <button>Borrar</button>
+      <li><a href="/delete/{{this._id}}">{{this.name}}</a></li>
+        <form action="/delete/{{this.id}}" method="post"><button>Borrar</button></form>
     {{/each}}
   </ul>
 </div>
