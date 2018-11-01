@@ -1,2 +1,21 @@
 <h1>{{repository.name}}</h1>
 <p>{{repository.description}}</p>
+<h3>Documents</h3>
+<ul>
+  {{#each documents}}
+    <ol>{{this.name}}-{{this.created_at}} <a href="{{this._id}}">Cargar nueva version</a> </ol>
+  {{/each}}
+</ul>
+<button>Subir Documento</button>
+
+
+<div>
+  <form action="/createDocument" method="post">
+    <h2>Subir nuevo documento</h2>
+    <input type="text" value="{{repository._id}}" hidden="hidden" name="repository" >
+    <input type="file" name="name">
+    <textarea name="description" id="txtDescripcion" cols="50" rows="3"></textarea>
+
+    <button type="submit">Cargar</button>
+  </form>
+</div>
