@@ -9,6 +9,7 @@ const documentSchema = new Schema({
   childDocuments: [String],
   authorizations: [String],
   locationUrl: String,
+  content: String,
   defaultVersion: {
     type: Boolean,
     default: true
