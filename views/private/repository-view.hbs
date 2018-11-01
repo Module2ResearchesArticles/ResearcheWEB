@@ -17,7 +17,15 @@
   {{/each}}
 </ul>
 <button>Subir Documento</button>
-
+<a href="/new-document/{{repository.id}}"> <button>Crear documento</button></a>
+{{!-- 
+<form action="/new-document/{{repository.id}}">
+<label for="">Nombre:</label>
+<input type="text" name="name">
+<label for="">Descripción: </label>
+<input type="text" name="description">
+<button type="submit">Comienza a editar</button>
+</form> --}}
 
 <div>
   <form action="/createDocument" method="post">

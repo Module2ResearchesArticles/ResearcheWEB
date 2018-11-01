@@ -11,4 +11,20 @@ router.post('/createDocument',(req,res) => {
     })
 });
 
+router.get('/new-document/:repoId',(req,res) => {
+  const repository = req.params.repoId
+  const name = 'Sin título'
+  Document.create({name, repository})
+    .then(document => {
+      res.render('private/editor', {document})
+    })  
+})
+
+router.post('/edit/:id', (req, res) => {
+  Document.findByIdAndUpdate(req.params.id, {$set: req.body})
+      .then(() => {
+        res.redirect(`/main/${req.user._id}`)
+      })
+})
+
 module.exports = router;
