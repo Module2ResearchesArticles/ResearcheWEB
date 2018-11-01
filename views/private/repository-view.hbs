@@ -1,2 +1,12 @@
 <h1>{{repository.name}}</h1>
 <p>{{repository.description}}</p>
+<form action="/update/{{repository._id}}" method="POST"><button>Modificar</button></form>
+{{#if update}}
+  <form action="/update-repository/{{repository._id}}" method="POST">
+    <label for="">Nombre: </label>
+    <input type="text" name="name" value="{{repository.name}}">
+    <label for="">Descripción: </label>
+    <input name="description" id="" cols="30" rows="10" value="{{repository.description}}"></input>
+    <button type="submit">Actualizar</button>
+  </form>
+{{/if}}
