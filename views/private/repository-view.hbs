@@ -10,7 +10,7 @@
 
 
 <div>
-  <form action="/createDocument" method="post">
+  <form action="/createDocument" method="post" enctype="multipart/form-data">
     <h2>Subir nuevo documento</h2>
     <input type="text" value="{{repository._id}}" hidden="hidden" name="repository" >
     <input type="file" name="name">

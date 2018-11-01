@@ -2,7 +2,7 @@ const express = require('express');
 const router  = express.Router();
 const User = require('../models/User')
 const Repository = require('../models/Repository')
-const Documents = require('../models/Document')
+
 function isLoggedIn(req, res, next){
   if(req.isAuthenticated()){
     return next()
@@ -43,20 +43,6 @@ router.get ('/main/:id', isLoggedIn, (req,res,next) => {
             console.log(err);
           })
       })
-})
-
-router.get('/repositories/:id',isAuthorized,(req, res) => {
-    Repository.findById(req.params.id)
-        .then(repository => {
-            Documents.find({repository:repository._id})
-            .then(documents => {
-                res.render('private/repository-view',{repository,documents})
-            })
-            
-        })
-        .catch(err => {
-            console.log(err)
-        })
 })
 
 router.get('/editor', (req, res, next) => {
