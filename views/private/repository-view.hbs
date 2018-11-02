@@ -14,10 +14,15 @@
 <ul>
   {{#each documents}}
     <ol>{{this.name}}-{{this.created_at}} <a href="{{this._id}}">Cargar nueva version</a> </ol>
+    {{#if this.content}}
+    <form action="/edit-created/{{this.id}}" method="POST">
+      <button type="submit">Editar</button>
+    </form>
+    {{/if}}
   {{/each}}
 </ul>
 <button>Subir Documento</button>
-<a href="/new-document/{{repository.id}}"> <button>Crear documento</button></a>
+<a href="/new-document/{{repository.id}}"> <button>Crear documento</button></a> 
 {{!-- 
 <form action="/new-document/{{repository.id}}">
 <label for="">Nombre:</label>

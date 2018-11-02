@@ -27,4 +27,11 @@ router.post('/edit/:id', (req, res) => {
       })
 })
 
+router.post('/edit-created/:id', (req, res) => {
+  Document.findByIdAndUpdate(req.params.id)
+      .then(document => {
+        res.render('private/editor', {document})
+      })
+})
+
 module.exports = router;

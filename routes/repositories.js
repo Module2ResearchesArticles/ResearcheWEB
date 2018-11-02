@@ -28,9 +28,10 @@ router.post('/create-repository',(req, res) => {
 })
 
 router.get('/repositories/:id',isAuthorized,(req, res) => {
+    const user = req.user
   Repository.findById(req.params.id)
       .then(repository => {
-          Document.find({repository:repository._id})
+          Document.find({repository:repository._id, user})
             .then(documents => {
               res.render('private/repository-view',{repository, documents})
             })
