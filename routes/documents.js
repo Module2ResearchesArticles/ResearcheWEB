@@ -3,14 +3,27 @@ const router = express.Router();
 const Document = require('../models/Document');
 const upload = require('../helpers/multer');
 
-router.post('/createDocument',(req,res) => {
-  const {repository,name,description} = req.body;
-  // console.log(`repository: ${repository}, name: ${name}, description: ${description} `);
-  Document.create({name,description,repository})
-  .then(() => {
-    res.redirect(`/repositories/${repository}`);
-  })
-});
+router.post('/createDocument',upload.single('name') ,(req,res) => {
+  const {repository,description,parentDocument} = req.body;
+  var locationUrl = req.file.url,
+  name= req.file.originalname,
+  version = req.body.version;
+  if(version == 'NaN') version = 0; 
+  if(parentDocument === "undefined" || parentDocument === 0) {
+    version = 1;
+    Document.create({name,description,repository,version,locationUrl})
+      .then(() => {
+        res.redirect(`/repositories/${repository}`);
+      })
+  }else{
+    
+    version = parseInt(version)  + 1;
+    Document.create({name,description,repository,locationUrl,version,parentDocument})
+      .then(() => {
+        res.redirect(`/repositories/${repository}`);
+      })
+  }
+})
 
 router.get('/documents/delete/:id', (req, res) => {
   Document.findByIdAndDelete(req.params.id)
@@ -21,7 +34,7 @@ router.get('/documents/delete/:id', (req, res) => {
 
 router.get('/new-document/:repoId',(req,res) => {
   const repository = req.params.repoId
-  const name = 'Sin título'
+  const name = 'Primer Documento'
   Document.create({name, repository})
   .then(document => {
     res.render('private/editor', {document})

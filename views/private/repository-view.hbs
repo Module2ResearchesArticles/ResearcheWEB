@@ -14,7 +14,7 @@
 <ul>
   {{#each documents}}
     <ol>{{this.name}}-{{this.created_at}} versión: {{this.version }} 
-      {{#if this.locationUrl}}<a href="{{this._id}}">Cargar nueva version</a>{{/if}} </ol>
+      {{#if this.locationUrl}}<button data-parent="{{this._id}}" data-version="{{this.version}}">Cargar nueva version</button>{{/if}} </ol>
     {{#if this.content}}
     <form action="/edit-created/{{this.id}}" method="POST">
       <button type="submit">Editar</button>
@@ -23,7 +23,7 @@
     <a href="/documents/delete/{{this.id}}"><button>Borrar</button></a>
   {{/each}}
 </ul>
-<button>Subir Documento</button>
+<button data-cargar="1" >Subir Documento</button>
 <a href="/new-document/{{repository.id}}"> <button>Crear documento</button></a> 
 {{!-- 
 <form action="/new-document/{{repository.id}}">
@@ -38,10 +38,31 @@
   <form action="/createDocument" method="post" enctype="multipart/form-data">
     <h2>Subir nuevo documento</h2>
     <input type="hidden" value="{{repository._id}}" name="repository" >
-    <input type="hidden" name="parentDocument" id="parentDoc" >
+    <input type="hidden" value="0" name="parentDocument" id="parentDoc"  >
+    <input type="hidden" value="0" name="version" id="version" >
     <input type="file" name="name">
     <textarea name="description" id="txtDescripcion" cols="50" rows="3"></textarea>
 
-    <button type="submit">Cargar</button>
+    <button type="submit" data-cargar="1" >Cargar</button>
   </form>
 </div>
+
+
+<script>
+  var btnNewVersion = document.getElementsByTagName('button');
+  var arr = [].slice.call(btnNewVersion);
+  arr.map((element) => {
+    element.onclick = function(){
+      if(element.dataset.cargar != 1){      
+        var idParent = element.dataset.parent,
+            ver = element.dataset.version;
+        document.getElementsByTagName('h2')[0].innerText = "Subir nueva versión de " + idParent
+        document.getElementById('parentDoc').value = idParent;
+        document.getElementById('version').value = ver;
+      }
+      
+  };
+  })
+  
+
+</script>
