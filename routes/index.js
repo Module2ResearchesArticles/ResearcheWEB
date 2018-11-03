@@ -12,18 +12,7 @@ function isLoggedIn(req, res, next){
   }
 }
 
-function isAuthorized(req, res, next){
-    Repository.findById(req.params.id)
-        .then (repository => {
-            console.log(repository.author + req.user._id)
-            if(repository.author.equals(req.user._id)){
-                return next()
-            } else {
-                console.log('aquí no puedes entrar')
-                res.redirect('/')
-            }
-        })
-}
+
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -44,6 +33,8 @@ router.get ('/main/:id', isLoggedIn, (req,res,next) => {
           })
       })
 })
+
+
 
 router.get('/editor', (req, res, next) => {
     var info = '<h1>aqui estara todo el pedo de la base</h1>';

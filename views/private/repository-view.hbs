@@ -1,13 +1,38 @@
 <h1>{{repository.name}}</h1>
 <p>{{repository.description}}</p>
+<form action="/update/{{repository._id}}" method="POST"><button>Modificar</button></form>
+{{#if update}}
+  <form action="/update-repository/{{repository._id}}" method="POST">
+    <label for="">Nombre: </label>
+    <input type="text" name="name" value="{{repository.name}}">
+    <label for="">Descripción: </label>
+    <input name="description" id="" cols="30" rows="10" value="{{repository.description}}"></input>
+    <button type="submit">Actualizar</button>
+  </form>
+{{/if}}
 <h3>Documents</h3>
 <ul>
   {{#each documents}}
-    <ol>{{this.name}} -    <b>{{this.created_at}}</b>  <button data-parent="{{this._id}}" >Cargar nueva version</button> </ol>
+    <ol>{{this.name}}-{{this.created_at}} versión: {{this.version }} 
+      {{#if this.locationUrl}}<a href="{{this._id}}">Cargar nueva version</a>{{/if}} </ol>
+    {{#if this.content}}
+    <form action="/edit-created/{{this.id}}" method="POST">
+      <button type="submit">Editar</button>
+    </form>
+    {{/if}}
+    <a href="/documents/delete/{{this.id}}"><button>Borrar</button></a>
   {{/each}}
 </ul>
 <button>Subir Documento</button>
-
+<a href="/new-document/{{repository.id}}"> <button>Crear documento</button></a> 
+{{!-- 
+<form action="/new-document/{{repository.id}}">
+<label for="">Nombre:</label>
+<input type="text" name="name">
+<label for="">Descripción: </label>
+<input type="text" name="description">
+<button type="submit">Comienza a editar</button>
+</form> --}}
 
 <div >
   <form action="/createDocument" method="post" enctype="multipart/form-data">
@@ -20,16 +45,3 @@
     <button type="submit">Cargar</button>
   </form>
 </div>
-
-<script>
-  var btnNewVersion = document.getElementsByTagName('button');
-  var arr = [].slice.call(btnNewVersion);
-  arr.map((element) => {
-    element.onclick = function(){
-      document.getElementsByTagName('h2')[0].innerText = "Subir nueva versión"
-      document.getElementById('parentDoc').value = element.dataset.parent;
-  };
-  })
-  
-
-</script>
