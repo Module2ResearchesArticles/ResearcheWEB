@@ -3,19 +3,33 @@
 <h3>Documents</h3>
 <ul>
   {{#each documents}}
-    <ol>{{this.name}}-{{this.created_at}} <a href="{{this._id}}">Cargar nueva version</a> </ol>
+    <ol>{{this.name}} -    <b>{{this.created_at}}</b>  <button data-parent="{{this._id}}" >Cargar nueva version</button> </ol>
   {{/each}}
 </ul>
 <button>Subir Documento</button>
 
 
-<div>
+<div >
   <form action="/createDocument" method="post" enctype="multipart/form-data">
     <h2>Subir nuevo documento</h2>
-    <input type="text" value="{{repository._id}}" hidden="hidden" name="repository" >
+    <input type="hidden" value="{{repository._id}}" name="repository" >
+    <input type="hidden" name="parentDocument" id="parentDoc" >
     <input type="file" name="name">
     <textarea name="description" id="txtDescripcion" cols="50" rows="3"></textarea>
 
     <button type="submit">Cargar</button>
   </form>
 </div>
+
+<script>
+  var btnNewVersion = document.getElementsByTagName('button');
+  var arr = [].slice.call(btnNewVersion);
+  arr.map((element) => {
+    element.onclick = function(){
+      document.getElementsByTagName('h2')[0].innerText = "Subir nueva versión"
+      document.getElementById('parentDoc').value = element.dataset.parent;
+  };
+  })
+  
+
+</script>
