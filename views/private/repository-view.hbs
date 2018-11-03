@@ -13,12 +13,14 @@
 <h3>Documents</h3>
 <ul>
   {{#each documents}}
-    <ol>{{this.name}}-{{this.created_at}} <a href="{{this._id}}">Cargar nueva version</a> </ol>
+    <ol>{{this.name}}-{{this.created_at}} versión: {{this.version }} 
+      {{#if this.locationUrl}}<a href="{{this._id}}">Cargar nueva version</a>{{/if}} </ol>
     {{#if this.content}}
     <form action="/edit-created/{{this.id}}" method="POST">
       <button type="submit">Editar</button>
     </form>
     {{/if}}
+    <a href="/documents/delete/{{this.id}}"><button>Borrar</button></a>
   {{/each}}
 </ul>
 <button>Subir Documento</button>

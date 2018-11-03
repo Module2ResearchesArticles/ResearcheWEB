@@ -12,6 +12,10 @@ const documentSchema = new Schema({
     type:   idObject,
     ref:    "Document"
   },
+  version: {
+    type: Number,
+    default: 1
+  },
   authorizations: [String],
   locationUrl: String,
   content: String,

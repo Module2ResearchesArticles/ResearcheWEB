@@ -7,7 +7,6 @@ const Document = require('../models/Document');
 function isAuthorized(req, res, next){
   Repository.findById(req.params.id)
       .then (repository => {
-          console.log(repository.author + req.user._id)
           if(repository.author.equals(req.user._id)){
               return next()
           } else {
@@ -31,9 +30,9 @@ router.get('/repositories/:id',isAuthorized,(req, res) => {
     const user = req.user
   Repository.findById(req.params.id)
       .then(repository => {
-          Document.find({repository:repository._id, user})
+          Document.find({repository:repository._id})
             .then(documents => {
-              res.render('private/repository-view',{repository, documents})
+                res.render('private/repository-view',{repository, documents, user})
             })
          
       })

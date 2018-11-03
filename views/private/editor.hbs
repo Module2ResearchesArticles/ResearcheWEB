@@ -3,8 +3,11 @@
     <label for="">Título: </label>
     <input type="text" name="name" value="{{document.name}}"">
     <label for="">Descripción: </label>
-    <input type="text" name="description">
+    <input type="text" name="description" value="{{document.description}}">
     <textarea name="content" id="mytextarea">{{document.content}}</textarea>
+    <input type="radio" name="saveAsNew" value="false" checked> Guardar en la misma versión
+    <input type="radio" name="saveAsNew" value="true"> Guardar como una nueva versión
     <button type="submit">Guardar</button>
+    
   </form>
 
