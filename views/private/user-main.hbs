@@ -5,7 +5,7 @@
   <ul>
     {{#each repositories}}
       <li><a href="/repositories/{{this._id}}">{{this.name}}</a></li>
-        <form action="/delete/{{this.id}}" method="post"><button>Borrar</button></form>
+        <form action="/delete/{{this.id}}" method="post"><button class="btn waves-effect waves-light">Borrar</button></form>
     {{/each}}
   </ul>
 </div>
@@ -16,6 +16,6 @@
     <input type="text" name="name">
     <label for="">Descripción: </label>
     <textarea name="description" id="" cols="30" rows="10"></textarea>
-    <button type="submit">Crear repositorio</button>
+    <button class="btn waves-effect waves-light" type="submit">Crear repositorio</button>
   </form>
 </div>

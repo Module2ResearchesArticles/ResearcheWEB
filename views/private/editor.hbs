@@ -5,20 +5,21 @@
     <label for="">Descripción: </label>
     <input type="text" name="description" value="{{document.description}}">
     <textarea name="content" id="mytextarea">{{document.content}}</textarea>
-    <input type="radio" name="saveAsNew" value="false" checked> Guardar en la misma versión
-    <input type="radio" name="saveAsNew" value="true"> Guardar como una nueva versión
-    
      <p>
       <label>
-        <input name="group1" type="radio" checked />
-        <span>Red</span>
-      </label>
-      <label>
-        <input class="with-gap" name="group1" type="radio"  />
-        <span>Green</span>
+        <input name="saveAsNew" type="radio" value="false" checked />
+        <span>Guardar en la misma versión</span>
       </label>
     </p>
-    <button type="submit">Guardar</button>
+    <p>
+      <label>
+        <input name="saveAsNew" type="radio" value="true" />
+        <span>Guardar como una nueva versión</span>
+      </label>
+    </p>
+      {{!-- <p>  <label> <input type="radio" name="saveAsNew" value="false" checked/> Guardar en la misma versión</label> </p>
+     <p><label> <input type="radio" name="saveAsNew" value="true"/> Guardar como una nueva versión </label></p> --}}
+    <button class="btn waves-effect waves-light" type="submit">Guardar</button>
     
   </form>
 

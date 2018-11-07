@@ -1,13 +1,13 @@
 <h1>{{repository.name}}</h1>
 <p>{{repository.description}}</p>
-<form action="/update/{{repository._id}}" method="POST"><button>Modificar</button></form>
+<form action="/update/{{repository._id}}" method="POST"><button class="btn waves-effect waves-light">Modificar</button></form>
 {{#if update}}
   <form action="/update-repository/{{repository._id}}" method="POST">
     <label for="">Nombre: </label>
     <input type="text" name="name" value="{{repository.name}}">
     <label for="">Descripción: </label>
     <input name="description" id="" cols="30" rows="10" value="{{repository.description}}"></input>
-    <button type="submit">Actualizar</button>
+    <button class="btn waves-effect waves-light" type="submit">Actualizar</button>
   </form>
 {{/if}}
 <h3>Documents</h3>
@@ -17,14 +17,14 @@
       {{#if this.locationUrl}}<button data-parent="{{this._id}}" data-version="{{this.version}}">Cargar nueva version</button>{{/if}} </ol>
     {{#if this.content}}
     <form action="/edit-created/{{this.id}}" method="POST">
-      <button type="submit">Editar</button>
+      <button class="btn waves-effect waves-light" type="submit">Editar</button>
     </form>
     {{/if}}
-    <a href="/documents/delete/{{this.id}}"><button>Borrar</button></a>
+    <a href="/documents/delete/{{this.id}}"><button class="btn waves-effect waves-light">Borrar</button></a>
   {{/each}}
 </ul>
-<button data-cargar="1" >Subir Documento</button>
-<a href="/new-document/{{repository.id}}"> <button>Crear documento</button></a> 
+<button class="btn waves-effect waves-light">Subir Documento</button>
+<a href="/new-document/{{repository.id}}"> <button class="btn waves-effect waves-light">Crear documento</button></a> 
 {{!-- 
 <form action="/new-document/{{repository.id}}">
 <label for="">Nombre:</label>
@@ -43,7 +43,7 @@
     <input type="file" name="name">
     <textarea name="description" id="txtDescripcion" cols="50" rows="3"></textarea>
 
-    <button type="submit" data-cargar="1" >Cargar</button>
+    <button class="btn waves-effect waves-light"  data-cargar="1"  type="submit">Cargar</button>
   </form>
 </div>
 
