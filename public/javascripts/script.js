@@ -7,3 +7,5 @@ document.addEventListener('DOMContentLoaded', () => {
 tinymce.init({
     selector: '#mytextarea'
   });
+
+M.AutoInit();
