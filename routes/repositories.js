@@ -22,7 +22,7 @@ router.post('/create-repository',(req, res) => {
   const author = req.user._id; 
   Repository.create({name,description,author})
             .then(repository => {
-              res.redirect(`/main/${req.user._id}`)
+              res.redirect(`/${req.user._id}`)
             })
 })
 
@@ -44,7 +44,7 @@ router.get('/repositories/:id',isAuthorized,(req, res) => {
 router.post('/delete/:id', (req, res) => {
   Repository.findByIdAndRemove(req.params.id)
       .then(() =>{
-          res.redirect(`/main/${req.user._id}`)
+          res.redirect(`/${req.user._id}`)
       })
 })
 
