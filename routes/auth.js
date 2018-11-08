@@ -72,7 +72,7 @@ router.get('/login',(req,res) => {
 
 router.post('/login', passport.authenticate('local'), (req, res) =>  {
   console.log('ya te')
-  res.redirect(`/main/${req.user._id}`)
+  res.redirect(`/${req.user._id}`)
 });
 
 router.get('/logout', (req,res) => {
