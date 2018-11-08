@@ -1,21 +1,51 @@
 <a href="/auth/logout">Logout</a>
-<h2>Perfil de {{user.username}}</h2>
+<h2>Bienvenido {{user.username}}</h2>
 <div>
-  <h3>Tus repositorios</h3>
-  <ul>
+<h3>Tus repositorios</h3>
+  <ul class="collapsible"> 
     {{#each repositories}}
-      <li><a href="/repositories/{{this._id}}">{{this.name}}</a></li>
-        <form action="/delete/{{this.id}}" method="post"><button class="btn waves-effect waves-light">Borrar</button></form>
+      <li>
+        <div class="collapsible-header">
+            <i class="material-icons large">storage</i>
+            <a href="/repositories/{{this._id}}">{{this.name}}</a>            
+        </div>
+        
+        <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+      </li>
+      <form action="/delete/{{this._id}}" method="post">
+        <button class="waves-effect waves-circle waves-light btn-floating secondary-content blue darken-1" type="submit"><i class="material-icons">delete</i></button>
+      </form> 
     {{/each}}
   </ul>
 </div>
-<div>
-  <h3>Crea un repositorio</h3>
-  <form action="/create-repository" method="POST">
-    <label for="">Nombre: </label>
-    <input type="text" name="name">
-    <label for="">Descripción: </label>
-    <textarea name="description" id="" cols="30" rows="10"></textarea>
-    <button class="btn waves-effect waves-light" type="submit">Crear repositorio</button>
-  </form>
+
+<button data-target="modal1" class="btn modal-trigger blue darken-1">Crear Repositorio</button>
+
+<!-- Modal Structure -->
+<div id="modal1" class="modal">
+  <div class="modal-content">
+    <h4>Crea un repositorio</h4>
+    <div class="row">
+      <form action="/create-repository" method="POST" class="col s12">
+        <div class="row">
+          <div class="input-field col s12">
+            <label for="inputName">Nombre: </label>
+            <input id="inputName" type="text" name="name" class="validate">
+          </div>
+          <div class="input-field col s12">
+            <label for="txtDesc">Descripción: </label>
+            <textarea name="description" id="txtDesc" class="materialize-textarea"> </textarea>
+          </div>
+          <div class="input-field col s12 center-align">
+              <button class="bmodal-close waves-effect waves-green btn blue darken-1" type="submit">Crear</button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+  </div>
+  <div class="modal-footer">
+    <a href="" >-</a>
+  </div>
 </div>
+          
