@@ -20,7 +20,7 @@ router.get('/', (req, res, next) => {
 });
 /* GET home page */
 
-router.get ('/main/:id', isLoggedIn, (req,res,next) => {
+router.get ('/:id', isLoggedIn, (req,res,next) => {
   User.findById(req.params.id)
       .then(user => {
         Repository.find({author:user._id})

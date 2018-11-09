@@ -13,10 +13,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     
 </head>
+
+
 <body>
-  <nav class="light-blue">{{#if user}}
-      <a href="/main/{{user._id}}">Mi perfil</a>
-    {{/if}}</nav>
+    <nav class="light-blue">
+      <div class="nav-wrapper">
+         <a href="/{{user._id}}" class="brand-logo" style="padding-left: 10px"><i class="material-icons left large">home</i> Inicio</a>
+         <ul class="right hide-on-med-and-down">
+        {{#if user}}
+        <li><a href="/auth/logout" class="waves-effect waves-light btn orange">Cerrar Sesión</a></li>
+        {{else}}
+        <li><a href="/auth/login" class="waves-effect waves-light btn orange">Iniciar Sesión</a></li>
+        {{/if}}
+      </ul>            
+    </nav>
+ 
+  {{!-- <nav class="light-blue">
+    <div class="nav-wrapper">
+    <a href="/"><i class="material-icons left">cloud</i>button</a>
+
+  <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+    <i class="material-icons right">send</i>
+  </button>
+     <a href="/home" class="waves-effect waves-light btn"><i class="material-icons left">home</i>Inicio</a>
+         {{#if user}}
+         <a href="/main/{{user._id}}">Mi perfil</a>
+    {{/if}}
+    </div>
+    </nav> --}}
+
+
+  
     
   {{{body}}}
    <script src='https://cloud.tinymce.com/stable/tinymce.min.js'></script>

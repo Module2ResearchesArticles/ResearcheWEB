@@ -33,15 +33,17 @@ router.get('/documents/delete/:id', (req, res) => {
 })
 
 router.get('/new-document/:repoId',(req,res) => {
+  const user = req.user
   const repository = req.params.repoId
   const name = 'Primer Documento'
   Document.create({name, repository})
   .then(document => {
-    res.render('private/editor', {document})
+    res.render('private/editor', {document, user})
   })  
 })
 
 router.post('/edit/:id', (req, res) => {
+  
   if (req.body.saveAsNew == "true"){
     Document.findById(req.params.id)
       .then (parent => {
@@ -64,9 +66,10 @@ router.post('/edit/:id', (req, res) => {
 })
 
 router.post('/edit-created/:id', (req, res) => {
+  const user = req.user
   Document.findByIdAndUpdate(req.params.id)
   .then(document => {
-    res.render('private/editor', {document})
+    res.render('private/editor', {document, user})
   })
 })
 
