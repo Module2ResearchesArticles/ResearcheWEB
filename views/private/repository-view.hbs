@@ -1,52 +1,76 @@
 <h1>{{repository.name}}</h1>
 <p>{{repository.description}}</p>
-<form action="/update/{{repository._id}}" method="POST"><button class="btn waves-effect waves-light">Modificar</button></form>
+<form action="/update/{{repository._id}}" method="POST"><button class="btn waves-effect waves-light  blue darken-1">Modificar</button></form>
 {{#if update}}
   <form action="/update-repository/{{repository._id}}" method="POST">
     <label for="">Nombre: </label>
     <input type="text" name="name" value="{{repository.name}}">
     <label for="">Descripción: </label>
     <input name="description" id="" cols="30" rows="10" value="{{repository.description}}"></input>
-    <button class="btn waves-effect waves-light" type="submit">Actualizar</button>
+    <button class="btn waves-effect waves-light  blue darken-1" type="submit">Actualizar</button>
   </form>
 {{/if}}
 <h3>Documents</h3>
-<ul>
+<ul class="collapsible">
   {{#each documents}}
-    <ol>{{this.name}}-{{this.created_at}} versión: {{this.version }} 
-      {{#if this.locationUrl}}<button data-parent="{{this._id}}" data-version="{{this.version}}">Cargar nueva version</button>{{/if}} </ol>
+    <ol>
+      <div class="collapsible-header">
+          <i class="material-icons large">library_books</i>
+          {{this.name}}-{{this.created_at}} versión: {{this.version }}          
+      </div>
+    </ol>
+    {{#if this.locationUrl}}
+      <button data-target="modal2" class="modal-trigger waves-effect waves-circle waves-light btn-floating secondary-content blue darken-1" data-parent="{{this._id}}" data-version="{{this.version}}" type="submit"><i class="material-icons">cloud_upload</i></button>      
+    {{/if}} 
     {{#if this.content}}
-    <form action="/edit-created/{{this.id}}" method="POST">
-      <button class="btn waves-effect waves-light" type="submit">Editar</button>
-    </form>
+      <form action="/edit-created/{{this.id}}" method="POST">        
+        <button class="waves-effect waves-circle waves-light btn-floating secondary-content blue darken-1" type="submit"><i class="material-icons">edit</i></button>        
+      </form>
     {{/if}}
-    <a href="/documents/delete/{{this.id}}"><button class="btn waves-effect waves-light">Borrar</button></a>
+    <a href="/documents/delete/{{this.id}}" class="waves-effect waves-circle waves-light btn-floating secondary-content blue darken-1" type="submit"><i class="material-icons">delete</i></a>
   {{/each}}
 </ul>
-<button class="btn waves-effect waves-light">Subir Documento</button>
-<a href="/new-document/{{repository.id}}"> <button class="btn waves-effect waves-light">Crear documento</button></a> 
-{{!-- 
-<form action="/new-document/{{repository.id}}">
-<label for="">Nombre:</label>
-<input type="text" name="name">
-<label for="">Descripción: </label>
-<input type="text" name="description">
-<button type="submit">Comienza a editar</button>
-</form> --}}
 
-<div >
-  <form action="/createDocument" method="post" enctype="multipart/form-data">
+<button data-target="modal2" class="btn modal-trigger blue darken-1">Subir Documento</button>
+<a href="/new-document/{{repository.id}}"> 
+  <button class="btn waves-effect waves-light  blue darken-1">Crear documento</button>
+</a> 
+
+<div id="modal2" class="modal">
+  <div class="modal-content">
     <h2>Subir nuevo documento</h2>
-    <input type="hidden" value="{{repository._id}}" name="repository" >
-    <input type="hidden" value="0" name="parentDocument" id="parentDoc"  >
-    <input type="hidden" value="0" name="version" id="version" >
-    <input type="file" name="name">
-    <textarea name="description" id="txtDescripcion" cols="50" rows="3"></textarea>
+    <form action="/createDocument" method="post" enctype="multipart/form-data" class="col s12">
+      <div class="row">
+        <input type="hidden" value="{{repository._id}}" name="repository" >
+        <input type="hidden" value="0" name="parentDocument" id="parentDoc"  >
+        <input type="hidden" value="0" name="version" id="version" >
+        <div class="input-field col s12">
+          <div class="file-field input-field">
+            <div class="btn blue darken-1">
+              <span>File</span>
+              <input type="file" name="name" multiple>
+            </div>
+            <div class="file-path-wrapper">
+              <input class="file-path validate" type="text" >
+            </div>
+          </div>
+        </div>
+        <div class="input-field col s12">
+          <label for="txtDesc">Descripción: </label>
+            <textarea name="description" id="txtDesc" class="materialize-textarea"> </textarea>
+        </div>
+        <div class="input-field col s12">
+          <button class="bmodal-close waves-effect waves-green btn blue darken-1" data-cargar="1" type="submit">Crear</button>          
+        </div>                      
+      </div>      
+    </form>
+  </div>
 
-    <button class="btn waves-effect waves-light"  data-cargar="1"  type="submit">Cargar</button>
-  </form>
 </div>
 
+<div class="section"></div>
+<div class="section"></div>
+<div class="section"></div>
 
 <script>
   var btnNewVersion = document.getElementsByTagName('button');
