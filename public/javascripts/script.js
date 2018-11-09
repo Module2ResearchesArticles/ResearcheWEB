@@ -5,7 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
 }, false);
 
 tinymce.init({
-    selector: '#mytextarea'
+    selector: '#mytextarea',
+    plugins: "print  lists",
+    height: 300,
+    fontsize_formats: '8pt 10pt 12pt 14pt 18pt 24pt 36pt',
+    toolbar: 'undo redo | bold italic | fontsizeselect | alignleft aligncenter alignright alignjustify alignnone| bullist numlist | indent outdent'
+    // menubarus: "file",
+    // toolbar: "print"
   });
 
 M.AutoInit();
