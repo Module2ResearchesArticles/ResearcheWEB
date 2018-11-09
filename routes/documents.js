@@ -60,7 +60,7 @@ router.post('/edit/:id', (req, res) => {
   } else {
     Document.findByIdAndUpdate(req.params.id, {$set: req.body})
     .then(() => {
-      res.redirect(`/`)
+      res.redirect(`/${req.user._id}`)
     })
   }
 })

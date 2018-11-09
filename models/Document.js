@@ -8,6 +8,10 @@ const documentSchema = new Schema({
     type:   idObject,
     ref:    "Repository"
   },
+  motherDocument: {
+    type:   idObject,
+    ref:    "Document"
+  },
   parentDocument: {
     type:   idObject,
     ref:    "Document"

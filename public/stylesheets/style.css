@@ -4,4 +4,20 @@ body {
 a {
   color: #00B7FF; }
 
+.thumbnail {
+  height: 55px;
+  padding-top: 9px;
+  width: 120%; }
+
+.logo {
+  margin: auto;
+  width: 48%;
+  height: 62vh;
+  display: flex;
+  justify-content: center;
+  align-items: center; }
+
+.main-logo {
+  height: 60%; }
+
 /*# sourceMappingURL=style.css.map */
