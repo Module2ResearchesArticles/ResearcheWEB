@@ -88,13 +88,14 @@
     element.onclick = function(){
       if(element.dataset.cargar != 1){      
         var idParent = element.dataset.parent,
+        mjeee = "",
         ver = element.dataset.version;
         if(idParent === undefined){
-          idParent = 'Subir un nuevo documento';
+          mjeee = 'Subir un nuevo documento';
         }else{
-          idParent = 'Subir nueva versión';
+          mjeee = 'Subir nueva versión';
         }
-        document.getElementsByTagName('h2')[0].innerText = idParent
+        document.getElementsByTagName('h2')[0].innerText = mjeee
         document.getElementById('parentDoc').value = idParent;
         document.getElementById('version').value = ver;
       }
