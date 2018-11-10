@@ -4,16 +4,22 @@
   <ul class="collapsible"> 
     {{#each repositories}}
       <li>
-        <div class="collapsible-header">
+        <div class="collapsible-header row">
+          <div class="col s6">
             <i class="material-icons large">storage</i>
-            <a href="/repositories/{{this._id}}">{{this.name}}</a>            
+            <a href="/repositories/{{this._id}}">{{this.name}}</a> 
+          </div>
+          <div class="col s3"></div>
+          <div class="col s3">
+            <form action="/delete/{{this._id}}" method="post">
+              <button class="waves-effect waves-circle waves-light btn-floating secondary-content blue darken-1" type="submit"><i class="material-icons">delete</i></button>
+            </form>     
+          </div>                               
         </div>
         
         <div class="collapsible-body"><span>{{this.description}}</span></div>
       </li>
-      <form action="/delete/{{this._id}}" method="post">
-        <button class="waves-effect waves-circle waves-light btn-floating secondary-content blue darken-1" type="submit"><i class="material-icons">delete</i></button>
-      </form> 
+      
     {{/each}}
   </ul>
 </div>

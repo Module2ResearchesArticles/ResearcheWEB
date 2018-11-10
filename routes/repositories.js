@@ -3,6 +3,7 @@ const router = express.Router();
 const User = require('../models/User');
 const Repository = require('../models/Repository');
 const Document = require('../models/Document');
+const moment = require('moment');
 
 function isAuthorized(req, res, next){
   Repository.findById(req.params.id)
@@ -32,6 +33,17 @@ router.get('/repositories/:id',isAuthorized,(req, res) => {
       .then(repository => {
           Document.find({repository:repository._id})
             .then(documents => {
+                /* var documentsandDates = documents.map((doc) => {
+                    let formatDate = moment(doc.created_at).fromNow();
+                    let newObj = Object.defineProperty(doc,'createdFrom',{value:formatDate});
+                    console.log(newObj);
+                    return newObj;
+                  });
+                  console.log(documentsandDates); */
+                  documents.forEach((e,index) =>{
+                      documents[index].perro = moment(e.created_at).fromNow();
+                  });
+                  console.log(documents);
                 res.render('private/repository-view',{repository, documents, user})
             })
          
